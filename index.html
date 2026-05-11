@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico?v=1">
+    <title>Chuyên Sinh | Hoang Long Archive</title>
+    <style>
+        /* ================= THEME VARIABLES ================= */
+        :root {
+            --bg-color: #fcfaf5;
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --primary-green: #2d5a27;
+            --soft-green: #e8f5e9;
+            --card-bg: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #5d6d7e;
+            --accent-wood: #8d6e63;
+            --border: #eeeeee;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0d1a0b;
+            --header-bg: rgba(13, 26, 11, 0.95);
+            --primary-green: #4caf50;
+            --soft-green: #1b2e1a;
+            --card-bg: #162615;
+            --text-dark: #e8f5e9;
+            --text-light: #a5d6a7;
+            --accent-wood: #ffab91;
+            --border: #2e442d;
+        }
+
+        /* ================= GENERAL SETUP ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(var(--soft-green) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--header-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--primary-green);
+        }
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-green);
+    display: flex;
+    align-items: center; /* Quan trọng: Căn giữa theo trục dọc */
+    gap: 14px;
+    font-family: 'Georgia', serif;
+    letter-spacing: 1px;
+    line-height: 1; /* Giúp cố định chiều cao dòng chữ */
+}
+
+.logo-img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 18px;
+    background: white;
+    padding: 4px;
+    border: 2px solid rgba(76, 175, 80, 0.25);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12); 
+    display: block; /* Loại bỏ khoảng trống thừa phía dưới ảnh */
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Đừng quên giữ lại hiệu ứng hover này ngay bên dưới .logo-img */
+.logo-img:hover {
+    transform: scale(1.08) rotate(-4deg);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18), 0 0 30px rgba(76,175,80,0.45);
+}
+
+.logo-img:hover {
+    transform:
+        scale(1.08)
+        rotate(-4deg);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.18),
+        0 0 30px rgba(76,175,80,0.45);
+}
+
+        .theme-switch {
+            background: var(--soft-green);
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ================= HERO & SEARCH ================= */
+        .hero { padding: 50px 5% 20px; text-align: center; }
+        .hero h1 { font-size: 3rem; color: var(--primary-green); margin-bottom: 10px; font-family: 'Georgia', serif; }
+        
+        .search-container { max-width: 600px; margin: 25px auto; }
+        .search-box {
+            width: 100%; padding: 15px 25px; border: 2px solid var(--border);
+            border-radius: 50px; background: var(--card-bg); color: var(--text-dark); outline: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        /* ================= CARDS GRID ================= */
+        main { padding: 10px 5% 80px; max-width: 1300px; margin: 0 auto; }
+        .cards-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 20px; 
+        }
+
+        .bio-card {
+            text-decoration: none; color: inherit; background: var(--card-bg);
+            border-radius: 12px; padding: 20px; border: 1px solid var(--border);
+            display: flex; flex-direction: column; transition: all 0.3s ease;
+        }
+
+        .bio-card:hover { transform: translateY(-5px); border-color: var(--primary-green); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .card-emoji { font-size: 2rem; margin-bottom: 12px; }
+        .card-title { font-size: 1rem; font-weight: 700; color: var(--primary-green); margin-bottom: 8px; text-transform: uppercase; }
+        .card-desc { font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px; flex-grow: 1; }
+        .card-meta { font-size: 0.8rem; font-weight: bold; color: var(--accent-wood); border-top: 1px solid var(--border); padding-top: 12px; }
+
+        footer { text-align: center; padding: 40px 20px; background: var(--soft-green); border-top: 1px solid var(--border); }
+        .author { color: var(--primary-green); font-weight: 800; font-size: 1.1rem; margin-top: 5px; display: block; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="images/logo.png" alt="Logo Sinh Học" class="logo-img">
+        <span>Chuyên Sinh</span>
+    </div>
+
+    <button class="theme-switch" id="theme-toggle">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-text">Chế độ tối</span>
+    </button>
+</header>
+
+    <section class="hero">
+        <h1>Chuyên Sinh 📖</h1>
+        <div class="search-container">
+            <input type="text" class="search-box" id="search-input" placeholder="Tìm kiếm trong 13 bộ tài liệu... 🔍">
+        </div>
+    </section>
+
+    <main>
+        <div class="cards-grid" id="cards-container"></div>
+    </main>
+
+    <footer>
+        <p>Mục tiêu hướng tới: Chuyên Sinh – THPT Chuyên Lê Hồng Phong 🔬</p>
+        <span class="author">Created by Nguyễn Hoàng Long🔥</span>
+    </footer>
+
+    <script>
+        const cardData = [
+            { emoji: "🏆", title: "ĐỀ HSG 8 CẤP TRƯỜNG", url: "https://tailieu.vn/tim-kiem/?q=B%E1%BB%99+%C4%91%E1%BB%81+thi+h%E1%BB%8Dc+sinh+gi%E1%BB%8Fi+m%C3%B4n+Sinh+h%E1%BB%8Dc+l%E1%BB%9Bp+8+c%E1%BA%A5p+tr%C6%B0%E1%BB%9Dng", desc: "Tài liệu các đề thi học sinh giỏi lớp 8 phong phú." },
+            { emoji: "📂", title: "KHO ĐỀ HSG TỔNG HỢP", url: "https://drive.google.com/drive/folders/15Gy1Y_pQJ8HvFy1hav_3i7Hgt83UQO8p", desc: "Thư mục Drive chứa nhiều bộ đề thi chọn lọc." },
+            { emoji: "📚", title: "BD HSG 9 - PHAN KHẮC NGHỆ", url: "https://drive.google.com/file/d/1RWoCL2xCi9dRmgN5in7epVficZwP_VRG/view?pli=1", desc: "Sách bồi dưỡng chuyên sâu từ thầy Phan Khắc Nghệ." },
+            { emoji: "📖", title: "BD HSG 9 - HUỲNH QUỐC THÀNH", url: "https://www.taisachonthi.com/2021/11/pdf-boi-duong-hoc-sinh-gioi-sinh-hoc-9.html?utm_source=chatgpt.com", desc: "Tài liệu bồi dưỡng học sinh giỏi lớp 9 chất lượng." },
+            { emoji: "🧪", title: "ĐỀ MINH HOẠ THPT 2026 (V1)", url: "https://drive.google.com/drive/folders/1DHCFvCF_DyE5XUyBX7PZ16QavZuYODv0?hl=vi&safe=active", desc: "Bộ đề đọc thử các môn theo cấu trúc mới 2026." },
+            { emoji: "📑", title: "60 ĐỀ MINH HOẠ MOONBOOK", url: "https://drive.google.com/file/d/1tPVc8_lE1CphW8N91PoAumzV-jmUb7KM/view", desc: "Sách 60 đề minh họa môn Sinh từ Moonbook." },
+            { emoji: "🧬", title: "ĐỀ MINH HOẠ THPT 2026 (V2)", url: "https://drive.google.com/drive/folders/1hYDCL3ldC0aKoziPcNEVcuiH04n6y75D?hl=vi&safe=active", desc: "Phiên bản bổ sung các môn thi cho năm 2026." },
+            { emoji: "🧵", title: "THREADS HA_MINI19", url: "https://www.threads.com/@ha_mini19", desc: "Trang cá nhân chia sẻ nhiều tài liệu học tập hay." },
+            { emoji: "🏫", title: "ÔN THI CHUYÊN SINH 9-12", url: "https://hoclieuxanh.com/posts/bo-21-de-chon-doi-tuyen-olympic-sinh-hoc-quoc-te-tu-2003-den-2021-pdf?utm_source=chatgpt.com", desc: "Bộ 21 đề chọn đội tuyển Olympic quốc tế." },
+            { emoji: "📝", title: "24 ĐỀ THỬ TRƯỜNG SỞ (V1)", url: "https://www.threads.com/@ha_mini19/post/DWRTcLEj3cP", desc: "Tổng hợp 24 đề thi thử môn Sinh học năm 2025." },
+            { emoji: "📝", title: "24 ĐỀ THỬ TRƯỜNG SỞ (V2)", url: "https://www.threads.com/@ha_mini19/post/DWQFdbrjwqm", desc: "Danh sách 24 đề thi thử bổ sung cho kỳ thi 2025." },
+            { emoji: "📊", title: "KHO 65 ĐỀ THI THỬ", url: "https://drive.google.com/drive/folders/1dFq7YwsV2Ukb-v0GHfGl-9LYKTitMUmA", desc: "Thư mục tổng hợp 65 đề thi thử môn Sinh học." },
+            { emoji: "🔬", title: "ÔN CHUYÊN SINH 10-12", url: "https://www.vnteach.com/tai-lieu-hsg-sinh-hoc-10?utm_source=chatgpt.com", desc: "Tài liệu học tập dành cho khối THPT chuyên." }
+        ];
+
+        const container = document.getElementById('cards-container');
+        cardData.forEach(data => {
+            const card = document.createElement('a');
+            card.href = data.url;
+            card.target = "_blank";
+            card.className = "bio-card";
+            card.innerHTML = `
+                <span class="card-emoji">${data.emoji}</span>
+                <div class="card-title">${data.title}</div>
+                <div class="card-desc">${data.desc}</div>
+                <div class="card-meta">Mở tài liệu ngay ➜</div>
+            `;
+            container.appendChild(card);
+        });
+
+        // Theme Toggle Logic
+        const toggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeText = document.getElementById('theme-text');
+
+        toggleBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                themeIcon.innerText = '🌙';
+                themeText.innerText = 'Chế độ tối';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.innerText = '☀️';
+                themeText.innerText = 'Chế độ sáng';
+            }
+        });
+
+        // Search Logic
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll('.bio-card').forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(term) ? 'flex' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
